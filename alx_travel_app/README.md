@@ -1,43 +1,58 @@
-Overview
+Step 1: Create Models
 
-This task guides learners through creating essential backend components in Django by defining database models, setting up serializers for API data representation, and implementing a management command to seed the database. By working on the duplicated alx_travel_app_0x00 project, learners will gain practical experience in structuring relational data, serializing it for API endpoints, and programmatically populating the database with sample data to simulate real-world application scenarios.
-Learning Objectives
+Clean, production‑ready models. I’ll define Listing, Booking, and Review with appropriate fields, relationships, and constraints so they’re ready for migrations and API exposure.
+⚙️ Key Features
 
-By the end of this task, learners should be able to:
+    Listing
 
-    Model relational data in Django using appropriate fields, relationships, and constraints.
-    Create serializers to transform Django model instances into JSON for API responses.
-    Implement a management command to automate database seeding.
-    Test and validate database population using Django’s command-line tools.
+        Owner relationship (User).
 
-Learning Outcomes
+        Price constraint (>= 0).
 
-Learners will be able to:
+        Availability flag.
 
-    Define models such as Listing, Booking, and Review with correct relationships (e.g., ForeignKey, OneToMany).
-    Use Django REST Framework (DRF) serializers to prepare model data for APIs.
-    Write and execute a seeding script to insert realistic sample data into the database.
-    Apply database seeding to streamline development and testing workflows.
+    Booking
 
-Key Concepts
+        Linked to both Listing and User.
 
-    Django Models – Mapping Python classes to database tables.
-    Relationships – Implementing one-to-many and many-to-one associations between models.
-    Constraints – Ensuring data integrity with validation rules.
-    Serializers – Converting complex data types into JSON for APIs using DRF.
-    Management Commands – Extending Django’s CLI to perform custom tasks.
-    Database Seeding – Populating databases with sample or default data.
+        Date constraint (check_out > check_in).
 
-Tools & Libraries
+        Guests constraint (>= 1).
 
-    Django – Backend framework for building the application.
-    Django REST Framework (DRF) – For creating API serializers and endpoints.
-    SQLite/PostgreSQL – Database engines for storing data.
-    Python – Programming language for backend logic and scripts.
+    Review
 
-Real-World Use Case
+        Linked to both Listing and User.
 
-In a travel booking platform, developers need to design data structures for listings (properties available for booking), customer bookings, and user reviews. Serializers ensure this data can be delivered via APIs to mobile or web clients. During development, seeding the database with sample listings allows frontend developers and testers to work with realistic data without manually creating entries, significantly speeding up the development lifecycle and ensuring consistent test scenarios.
-Additional Resources:
+        Rating constraint (1–5).
 
-  
+        Unique constraint: one review per user per listing.
+
+Step 2: Set Up Serializers: listings/serializers.py
+scaffold serializers for your Listing and Booking models so they’re ready for DRF endpoints and Swagger documentation.
+    ⚙️ Key Features
+
+    ListingSerializer
+
+        Exposes all main fields.
+
+        owner shown as username (read‑only).
+
+    BookingSerializer
+
+        Exposes booking details.
+
+        user shown as username (read‑only).
+
+        Adds listing_title for clarity in Swagger responses.
+
+Step 3: Implement Seeders:
+
+    Create a management command in listings/management/commands/seed.py to populate the database with sample listings data.
+    The structure:
+    listings/
+    management/
+        __init__.py
+        commands/
+            __init__.py
+            seed.py
+
