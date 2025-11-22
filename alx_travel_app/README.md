@@ -56,3 +56,14 @@ Step 3: Implement Seeders:
             __init__.py
             seed.py
 
+    ⚙️ How It Works
+
+    Ensures a demo user exists (demo_user) to own the listings.
+
+    Seeds the database with 4 sample listings.
+
+    Uses get_or_create to avoid duplicates if you run the command multiple times.
+
+    Prints success/warning messages to the console.
+    
+
