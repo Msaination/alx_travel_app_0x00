@@ -1,0 +1,14 @@
+**.env
+*.venv_travel_X00
+__pycache__/
+db.sqlite3   
+*.pyc
+.DS_Store
+**.venv_travel_X00
+.env
+**.git
+.git
+*.git
+.venv_travel_X00
+
+
